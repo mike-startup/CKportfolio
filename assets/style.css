@@ -183,7 +183,7 @@ section {
 
 .heroLeft{
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateX(-20px);
     transition: 1s;
 }
 
@@ -193,7 +193,7 @@ section {
 }
 .heroRight{
     opacity: 0;
-    transform: translateX(50px);
+    transform: translateX(20px);
     transition: 1s;
 }
 .showHeroRight{
