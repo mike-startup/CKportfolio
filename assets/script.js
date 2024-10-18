@@ -202,3 +202,8 @@ document.getElementById("downloadBtn").addEventListener("click", function() {
   link.download = "Clive Kema Curriculum Vitae.pdf";  // Optional: The name you want the downloaded file to have
   link.click();
 });
+
+// JavaScript to navigate back to the previous page when the button is clicked
+document.getElementById("backBtn").addEventListener("click", function() {
+  history.back();
+});

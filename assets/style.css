@@ -241,10 +241,22 @@ section {
     width: 100%;
 }
 
-.chat {
-    margin: auto;
-    min-width: 290px;
-    max-height: 50rem;
+.chatbot {
+    background-color: #081b29;
+    position: fixed;
+    right: 4rem;
+    bottom: 4rem;
+    padding: 1rem;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 1rem;
+    box-shadow: 1px 1px 5px #ffffff80;
+    z-index: 1000;
+}
+
+.chatbot i{
+    font-size: 3rem;
+    color: white;
 }
 
 .hero-face {
@@ -376,6 +388,11 @@ section {
 
 .popup .btn-box {
     margin: 1rem auto;
+}
+
+iframe{
+    width: 300px;
+    height: 400px;
 }
 
 .about {
