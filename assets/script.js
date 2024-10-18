@@ -133,44 +133,65 @@ const button = document.getElementById("send");
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
-    console.log(entry)
-    if(entry.isIntersecting) {
-      entry.target.classList.add('show');
-    } else {
-      entry.target.classList.remove('show');
-    }
-    if(entry.isIntersecting) {
-      entry.target.classList.add('showHeroLeft');
-    } else {
-      entry.target.classList.remove('showHeroLeft');
-    }
-    if(entry.isIntersecting) {
-      entry.target.classList.add('showHeroRight');
-    } else {
-      entry.target.classList.remove('showHeroRight');
-    }
-  })
+    const { isIntersecting, target } = entry;
+    
+    
+    target.classList.toggle('showHeroLeft', isIntersecting);
+    target.classList.toggle('showHeroRight', isIntersecting);
+  });
 });
 
-const heroLeft = document.querySelectorAll('.heroLeft');
-heroLeft.forEach((el) => observer.observe(el));
-const heroRight = document.querySelectorAll('.heroRight');
-heroRight.forEach((el) => observer.observe(el));
-const hiddenElements = document.querySelectorAll('.hidden');
-hiddenElements.forEach((el) => observer.observe(el));
+// Observe all elements
+document.querySelectorAll('.heroLeft, .heroRight').forEach((el) => observer.observe(el));
 
-// Create intersection observer
+// Create intersection observer for header toggle
 const observer1 = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if(entry.isIntersecting) {
-      // Element A is in view, show element B
-      header.classList.add('hide-header');
-    } else {
-      // Element A is not in view, hide element B
-      header.classList.remove('hide-header');
+    header.classList.toggle('hide-header', entry.isIntersecting);
+  });
+});
+
+// Observe footer for header toggle
+observer1.observe(footer);
+let lastScrollY = window.scrollY; // Initial scroll position
+let scrollDirection = ''; // To track scroll direction
+let isScrolling = false;
+
+window.addEventListener('scroll', () => {
+  if (!isScrolling) {
+    window.requestAnimationFrame(() => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY) {
+        scrollDirection = 'down'; // User is scrolling down
+      } else if (currentScrollY < lastScrollY) {
+        scrollDirection = 'up'; // User is scrolling up
+      }
+
+      lastScrollY = currentScrollY; // Update last scroll position
+      isScrolling = false; // Reset scrolling state
+    });
+    isScrolling = true; // Set scrolling state
+  }
+});
+
+// Intersection Observer to trigger animations
+const observer2 = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    const { isIntersecting, target } = entry;
+
+    if (isIntersecting) {
+      if (scrollDirection === 'down') {
+        target.classList.add('animateScrollDown');
+        target.classList.remove('animateScrollUp');
+      } else if (scrollDirection === 'up') {
+        target.classList.add('animateScrollUp');
+        target.classList.remove('animateScrollDown');
+      }
     }
   });
 });
 
-// Observe element A
-observer1.observe(footer);
+// Observe all elements except for heroLeft and heroRight
+document.querySelectorAll('.hidden').forEach((el) => observer2.observe(el));
+

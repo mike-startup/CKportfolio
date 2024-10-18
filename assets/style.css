@@ -196,21 +196,23 @@ section {
     transform: translateX(50px);
     transition: 1s;
 }
-.showHeroright{
+.showHeroRight{
     opacity: 1;
     transform: translateX(0);
 }
 .hidden{
     opacity: 0;
-    transform: translateY(-50px);
-    transition: 1s;
+    transition: ease-out .5s;
 }
 
-.show{
-    transform: translateY(0);
+.animateScrollDown{
     opacity: 1;
+    transform: translateY(-10px);
 }
-
+.animateScrollUp{
+    opacity: 1;
+    transform: translateY(10px);
+}
 .background {
     position: fixed;
     top: 0;
