@@ -195,3 +195,10 @@ const observer2 = new IntersectionObserver((entries) => {
 // Observe all elements except for heroLeft and heroRight
 document.querySelectorAll('.hidden').forEach((el) => observer2.observe(el));
 
+// JavaScript to trigger download when the button is clicked
+document.getElementById("downloadBtn").addEventListener("click", function() {
+  const link = document.createElement("a");
+  link.href = "assets/img/cv-1.pdf";  // Path to your PDF in the root directory
+  link.download = "Clive Kema Curriculum Vitae.pdf";  // Optional: The name you want the downloaded file to have
+  link.click();
+});
